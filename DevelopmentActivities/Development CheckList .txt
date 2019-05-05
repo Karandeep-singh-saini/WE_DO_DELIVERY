@@ -1,0 +1,6 @@
+Smart Contracts
+
+	Restaurant 
+		- Registration of Restaurant -Done
+		- Retrieving all Restaurants -Done
+		- Add Restaurant Menu
