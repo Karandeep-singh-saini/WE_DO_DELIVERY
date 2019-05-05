@@ -48,7 +48,7 @@ class RestaurantRegistrationModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Centered Modal</h4>
+          <h4>------</h4>
           
             <input type="text" className="form-control custom-form-control" name="_restaurantName" placeholder="Name" />
             <input type="text" className="form-control custom-form-control" name="_restaurantCity" placeholder="City" />

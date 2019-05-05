@@ -19,12 +19,12 @@ class UserRegistrationModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </p>
+          <h4>--------</h4>
+          <input type="text" class="form-control custom-form-control" name="_userFname" placeholder="First Name" />
+          <input type="text" class="form-control custom-form-control" name="_userLname" placeholder="Last Name" />
+          <input type="text" class="form-control custom-form-control" name="_userContactNumber" placeholder="Phone" />
+          <input type="text" class="form-control custom-form-control" name="_userEmail" placeholder="Email" />
+          <textarea class="form-control custom-form-control" name="_userAddress" placeholder="Address"></textarea>
         </Modal.Body>
         <Modal.Footer>
           <Button /*onClick={this.props.onHide}*/>Submit</Button>

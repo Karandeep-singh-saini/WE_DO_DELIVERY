@@ -18,12 +18,11 @@ class RiderRegistrationModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </p>
+          <h4>-------</h4>
+          <input type="text" class="form-control custom-form-control" name="_riderName" placeholder="Name" />
+          <input type="text" class="form-control custom-form-control" name="_riderContactNumber" class="form-control custom-form-control" placeholder="Contact Number" />
+          <input type="text" class="form-control custom-form-control" name="_riderCity" placeholder="City" />
+          <input type="text" class="form-control custom-form-control" name="_riderVehicleType" placeholder="Vehicle Type" />
         </Modal.Body>
         <Modal.Footer>
           <Button /*onClick={this.props.onHide}*/>Submit</Button>
