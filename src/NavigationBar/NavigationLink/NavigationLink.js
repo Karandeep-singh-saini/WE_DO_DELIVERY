@@ -1,16 +1,21 @@
-import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom'
+import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 
-class NavigationLink extends Component{
-  render(){
-    return(
-      <div className='nav-item' >
-        <NavLink exact to={this.props.url} className="nav-link" style={{color:'#EEE'}} >
-          {this.props.text}
-        </NavLink>
-      </div>
-    );
-  }
+class NavigationLink extends Component {
+	render() {
+		return (
+			<div className="nav-item">
+				<NavLink
+					exact
+					to={this.props.url}
+					className="nav-link"
+					style={{ color: "#EEE" }}
+				>
+					{this.props.text}
+				</NavLink>
+			</div>
+		);
+	}
 }
 
 export default NavigationLink;

@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
-import {Navbar} from 'react-bootstrap';
-import Logo from './Logo/Logo'
-import NavigationLinks from './NavigationLinks/NavigationLinks'
-import './HeadNavBar.css';
+import React, { Component } from "react";
+import { Navbar } from "react-bootstrap";
+import Logo from "./Logo/Logo";
+import NavigationLinks from "./NavigationLinks/NavigationLinks";
+import "./HeadNavBar.css";
 
-
-class HeadNavBar extends Component{
-  render(){
-    return(
-        <Navbar className='fixed-top header' >
-            <div className='container'>
-              <Logo/>
-             {/* <SearchForm/>*/}
-              <NavigationLinks {...this.props}/>
-            </div>
-        </Navbar>
-      );
+class HeadNavBar extends Component {
+  render() {
+    return (
+      <Navbar className="fixed-top header">
+        <div className="container">
+          <Logo />
+          {/* <SearchForm/>*/}
+          <NavigationLinks {...this.props} />
+        </div>
+      </Navbar>
+    );
   }
 }
-
 
 /*class SearchForm extends Component{
   render(){
