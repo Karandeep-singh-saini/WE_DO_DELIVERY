@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import WE_DO_DELIVERY from "../we_do_delivery";
 import AppUtilities from "../utility/utility";
-import RestaurantInfo from "./RestaurantInfo/RestaurantInfo";
-import MenuContainer from "./MenuContainer/MenuContainer";
+import RestaurantInfo from "./RestaurantInfo";
+import MenuContainer from "./MenuContainer";
 
 class RestaurantPage extends Component {
 	constructor(props) {

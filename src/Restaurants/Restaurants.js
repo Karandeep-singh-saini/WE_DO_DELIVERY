@@ -1,43 +1,23 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Card, Button } from "react-bootstrap";
 import WE_DO_DELIVERY from "../we_do_delivery";
-import AppUtilities from "../utility/utility";
 import loader from "../images/loader.svg";
-import tempRestaurantImg from "../images/tempRestaurantImg.jpg";
-
-class RestaurantCard extends Component {
-	render() {
-		/* remove null from string after converting from hexToAscii*/
-		var name = AppUtilities.convertHexToAscii(this.props.restaurant._name);
-		var location = AppUtilities.convertHexToAscii(
-			this.props.restaurant._location
-		);
-		return (
-			<Link
-				to={{
-					pathname: `/restaurants/${
-						this.props.restaurant._restaurantIndex
-					}`,
-					state: {
-						restaurant: this.props.restaurant
-					}
-				}}
-			>
-				<Card style={{ width: "15rem" }}>
-					<Card.Img variant="top" src={tempRestaurantImg} />
-					<Card.Body>
-						<Card.Title>{name}</Card.Title>
-						<Card.Text>{location}</Card.Text>
-						<Button variant="primary">Order Now</Button>
-					</Card.Body>
-				</Card>
-			</Link>
-		);
-	}
-}
+import RestaurantCard from "./RestaurantCard";
 
 class Restaurants extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			restaurantCount: 0,
+			restaurants: [],
+			loading: true
+		};
+		this.listenForEventRestaurantAdded = this.listenForEventRestaurantAdded.bind(
+			this
+		);
+		this.changeRestaurantArrayAsGrid = this.changeRestaurantArrayAsGrid.bind(
+			this
+		);
+	}
 	componentWillMount() {
 		this.getAllRestaurants();
 	}
@@ -68,16 +48,8 @@ class Restaurants extends Component {
 				toBlock: "latest"
 			},
 			(error, event) => {
-				//console.log("Before:",this.state.restaurants)
 				this.state.restaurants.push(event.returnValues);
-
 				this.setState({ restaurants: this.state.restaurants });
-				/*this.setState(function(state, props) {
-					  state.restaurants.push(event.returnValues);
-					  return {
-					    restaurants: state.restaurants
-					  };
-					});*/
 			}
 		);
 	}
@@ -89,24 +61,8 @@ class Restaurants extends Component {
 		}
 		return grid;
 	}
-	constructor(props) {
-		super(props);
-		this.state = {
-			restaurantCount: 0,
-			restaurants: [],
-			loading: true
-		};
-		this.listenForEventRestaurantAdded = this.listenForEventRestaurantAdded.bind(
-			this
-		);
-		this.changeRestaurantArrayAsGrid = this.changeRestaurantArrayAsGrid.bind(
-			this
-		);
-	}
 
 	render() {
-		//console.log("restaurantCount : ",this.state.restaurantCount);
-		//console.log("restaurants : ",this.state.restaurants.length);
 		return (
 			<div className="container">
 				{this.state.loading ? (

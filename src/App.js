@@ -11,23 +11,6 @@ import Footer from "./Footer/Footer";
 import Home from "./HomePage/Home";
 
 class App extends Component {
-  componentWillMount() {
-    this.loadBlockchainData();
-  }
-
-  async loadBlockchainData() {
-    /*this.setState( { WE_DO_DELIVERY } );
-    const restaurantCount = await WE_DO_DELIVERY.methods.getRestaurantCount().call();
-    console.log('Restaurant Count :',restaurantCount);
-    console.log("WE_DO_DELIVERY :",WE_DO_DELIVERY);
-    console.log('Account :',accounts[0]);*/
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     return (
       <BrowserRouter>

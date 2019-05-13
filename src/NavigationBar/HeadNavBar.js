@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Navbar } from "react-bootstrap";
-import Logo from "./Logo/Logo";
-import NavigationLinks from "./NavigationLinks/NavigationLinks";
+import Logo from "./Logo";
+import NavigationLinks from "./NavigationLinks";
 import "./HeadNavBar.css";
 
 class HeadNavBar extends Component {
