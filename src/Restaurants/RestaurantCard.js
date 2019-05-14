@@ -8,9 +8,7 @@ class RestaurantCard extends Component {
 	render() {
 		/* remove null from string after converting from hexToAscii*/
 		var name = AppUtilities.convertHexToAscii(this.props.restaurant._name);
-		var location = AppUtilities.convertHexToAscii(
-			this.props.restaurant._location
-		);
+		var city = AppUtilities.convertHexToAscii(this.props.restaurant._city);
 		return (
 			<Link
 				to={{
@@ -26,7 +24,7 @@ class RestaurantCard extends Component {
 					<Card.Img variant="top" src={tempRestaurantImg} />
 					<Card.Body>
 						<Card.Title>{name}</Card.Title>
-						<Card.Text>{location}</Card.Text>
+						<Card.Text>{city}</Card.Text>
 						<Button variant="primary">Order Now</Button>
 					</Card.Body>
 				</Card>

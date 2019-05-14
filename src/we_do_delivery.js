@@ -1,94 +1,171 @@
 import web3 from "./web3";
 
-const WE_DO_DELIVERY_ADDRESS = "0xf5C172Cf664703aC65FBfa87A0D5d0b2A9c873A9";
+const WE_DO_DELIVERY_ADDRESS = "0xd86619512a3518ae0f47044e843e246afc93323d";
 const WE_DO_DELIVERY_ABI = [
   {
-    constant: true,
+    constant: false,
     inputs: [
       {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "usersArray",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x2fae35c0"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "uint256"
-      }
-    ],
-    name: "ridersArray",
-    outputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0x93dc7586"
-  },
-  {
-    constant: true,
-    inputs: [
-      {
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "users",
-    outputs: [
-      {
-        name: "name",
-        type: "bytes32"
+        name: "_itemNameList",
+        type: "bytes32[]"
       },
       {
-        name: "registered",
+        name: "_itemPriceList",
+        type: "uint32[]"
+      }
+    ],
+    name: "addMenu",
+    outputs: [
+      {
+        name: "_success",
         type: "bool"
       }
     ],
     payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0xa87430ba"
+    stateMutability: "nonpayable",
+    type: "function"
   },
   {
-    constant: true,
+    constant: false,
     inputs: [
       {
-        name: "",
+        name: "_restaurantAddress",
         type: "address"
-      }
-    ],
-    name: "riders",
-    outputs: [
+      },
       {
-        name: "name",
+        name: "_orderId",
         type: "bytes32"
       },
       {
-        name: "registered",
+        name: "_itemIdList",
+        type: "uint32[]"
+      },
+      {
+        name: "_quantityList",
+        type: "uint32[]"
+      }
+    ],
+    name: "placeOrder",
+    outputs: [
+      {
+        name: "_total",
+        type: "uint256"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "_name",
+        type: "bytes32"
+      },
+      {
+        name: "_contactNumber",
+        type: "bytes16"
+      },
+      {
+        name: "_city",
+        type: "bytes8"
+      },
+      {
+        name: "_ownerName",
+        type: "bytes32"
+      },
+      {
+        name: "_restaurantAddress",
+        type: "bytes32"
+      }
+    ],
+    name: "registerRestaurant",
+    outputs: [
+      {
+        name: "_success",
         type: "bool"
       }
     ],
     payable: false,
-    stateMutability: "view",
-    type: "function",
-    signature: "0xad4c9558"
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "_name",
+        type: "bytes32"
+      },
+      {
+        name: "_contactNumber",
+        type: "bytes16"
+      },
+      {
+        name: "_city",
+        type: "bytes8"
+      },
+      {
+        name: "_vehicleType",
+        type: "bytes8"
+      }
+    ],
+    name: "registerRider",
+    outputs: [
+      {
+        name: "_success",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "_name",
+        type: "bytes32"
+      },
+      {
+        name: "_contactNumber",
+        type: "bytes16"
+      },
+      {
+        name: "_city",
+        type: "bytes8"
+      }
+    ],
+    name: "registerUser",
+    outputs: [
+      {
+        name: "_success",
+        type: "bool"
+      }
+    ],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "_orderId",
+        type: "bytes32"
+      },
+      {
+        name: "_confirmation",
+        type: "bool"
+      }
+    ],
+    name: "updateOrderStatus",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function"
   },
   {
     anonymous: false,
@@ -115,9 +192,7 @@ const WE_DO_DELIVERY_ABI = [
       }
     ],
     name: "RestaurantRegistered",
-    type: "event",
-    signature:
-      "0x7e7bf42dad519e200cb4ae3efc2eeebd5feadcb7f0f4697a24943c1eba4f9cb8"
+    type: "event"
   },
   {
     anonymous: false,
@@ -139,9 +214,7 @@ const WE_DO_DELIVERY_ABI = [
       }
     ],
     name: "RestaurantMenuChanged",
-    type: "event",
-    signature:
-      "0xa6f5a73517a8333b460c41e2e97eae47e7670731de23f9215daddf2e69d35a0a"
+    type: "event"
   },
   {
     anonymous: false,
@@ -150,17 +223,10 @@ const WE_DO_DELIVERY_ABI = [
         indexed: false,
         name: "restaurantAddress",
         type: "address"
-      },
-      {
-        indexed: false,
-        name: "name",
-        type: "bytes32"
       }
     ],
     name: "RiderRegistered",
-    type: "event",
-    signature:
-      "0x15492c2e3bf282ac310b33e7492f9aa1a5c24986421c0482644e5b21b2381769"
+    type: "event"
   },
   {
     anonymous: false,
@@ -169,17 +235,10 @@ const WE_DO_DELIVERY_ABI = [
         indexed: false,
         name: "restaurantAddress",
         type: "address"
-      },
-      {
-        indexed: false,
-        name: "name",
-        type: "bytes32"
       }
     ],
     name: "UserRegistered",
-    type: "event",
-    signature:
-      "0x4c5d15f5779ae1ecd7d55bd3283d898e29c35743d172bd7b83a16e17bc0afe2a"
+    type: "event"
   },
   {
     anonymous: false,
@@ -211,9 +270,7 @@ const WE_DO_DELIVERY_ABI = [
       }
     ],
     name: "OrderPlaced",
-    type: "event",
-    signature:
-      "0xb6c27a44a8a9dc09ad56c01a324fdc597b62721afac13c5287c8d64ec553aae8"
+    type: "event"
   },
   {
     anonymous: false,
@@ -230,89 +287,46 @@ const WE_DO_DELIVERY_ABI = [
       }
     ],
     name: "OrderConfirmed",
-    type: "event",
-    signature:
-      "0xbb94efa6810f9cbbb0ea2f6f5143e585ab4d09406e9c8ba65c601c1006c88980"
+    type: "event"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
+      {
+        name: "_index",
+        type: "uint256"
+      }
+    ],
+    name: "getRestaurant",
+    outputs: [
+      {
+        name: "_restaurantAccount",
+        type: "address"
+      },
       {
         name: "_name",
         type: "bytes32"
       },
       {
-        name: "_location",
+        name: "_contactNumber",
+        type: "bytes16"
+      },
+      {
+        name: "_city",
+        type: "bytes8"
+      },
+      {
+        name: "_ownerName",
         type: "bytes32"
       },
       {
-        name: "_itemNameList",
-        type: "bytes32[]"
-      },
-      {
-        name: "_itemPriceList",
-        type: "uint32[]"
-      }
-    ],
-    name: "registerRestaurant",
-    outputs: [
-      {
-        name: "_success",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x46635f61"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "_name",
-        type: "bytes32"
-      },
-      {
-        name: "_location",
+        name: "_restaurantAddress",
         type: "bytes32"
       }
     ],
-    name: "registerRestaurant",
-    outputs: [
-      {
-        name: "_success",
-        type: "bool"
-      }
-    ],
     payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0xe885739a"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "_itemNameList",
-        type: "bytes32[]"
-      },
-      {
-        name: "_itemPriceList",
-        type: "uint32[]"
-      }
-    ],
-    name: "addMenu",
-    outputs: [
-      {
-        name: "_success",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x64323374"
+    stateMutability: "view",
+    type: "function"
   },
   {
     constant: true,
@@ -326,139 +340,119 @@ const WE_DO_DELIVERY_ABI = [
     ],
     payable: false,
     stateMutability: "view",
-    type: "function",
-    signature: "0x9d93b640"
+    type: "function"
   },
   {
     constant: true,
     inputs: [
       {
-        name: "_index",
-        type: "uint256"
+        name: "",
+        type: "address"
       }
     ],
-    name: "getRestaurant",
+    name: "riders",
     outputs: [
       {
-        name: "_restaurantIndex",
-        type: "uint256"
-      },
-      {
-        name: "_restaurantAddress",
+        name: "riderAccount",
         type: "address"
       },
       {
-        name: "_name",
+        name: "name",
         type: "bytes32"
       },
       {
-        name: "_location",
-        type: "bytes32"
+        name: "contactNumber",
+        type: "bytes16"
       },
       {
-        name: "_itemsNames",
-        type: "bytes32[]"
+        name: "city",
+        type: "bytes8"
       },
       {
-        name: "_itemsPrice",
-        type: "uint32[]"
+        name: "vehicleType",
+        type: "bytes8"
+      },
+      {
+        name: "registered",
+        type: "bool"
       }
     ],
     payable: false,
     stateMutability: "view",
-    type: "function",
-    signature: "0xc298f1e7"
+    type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
       {
-        name: "_name",
-        type: "bytes32"
-      }
-    ],
-    name: "registerRider",
-    outputs: [
-      {
-        name: "_success",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x6a9c7c2f"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "_name",
-        type: "bytes32"
-      }
-    ],
-    name: "registerUser",
-    outputs: [
-      {
-        name: "_success",
-        type: "bool"
-      }
-    ],
-    payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x2dc03259"
-  },
-  {
-    constant: false,
-    inputs: [
-      {
-        name: "_restaurantAddress",
-        type: "address"
-      },
-      {
-        name: "_orderId",
-        type: "bytes32"
-      },
-      {
-        name: "_itemIdList",
-        type: "uint32[]"
-      },
-      {
-        name: "_quantityList",
-        type: "uint32[]"
-      }
-    ],
-    name: "placeOrder",
-    outputs: [
-      {
-        name: "_total",
+        name: "",
         type: "uint256"
       }
     ],
+    name: "ridersArray",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
     payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0x093b89ee"
+    stateMutability: "view",
+    type: "function"
   },
   {
-    constant: false,
+    constant: true,
     inputs: [
       {
-        name: "_orderId",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "users",
+    outputs: [
+      {
+        name: "userAccount",
+        type: "address"
+      },
+      {
+        name: "name",
         type: "bytes32"
       },
       {
-        name: "_confirmation",
+        name: "contactNumber",
+        type: "bytes16"
+      },
+      {
+        name: "city",
+        type: "bytes8"
+      },
+      {
+        name: "registered",
         type: "bool"
       }
     ],
-    name: "updateOrderStatus",
-    outputs: [],
     payable: false,
-    stateMutability: "nonpayable",
-    type: "function",
-    signature: "0xc529fa2a"
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "usersArray",
+    outputs: [
+      {
+        name: "",
+        type: "address"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
   }
 ];
 const contract = web3.eth.Contract(WE_DO_DELIVERY_ABI, WE_DO_DELIVERY_ADDRESS);

@@ -12,36 +12,37 @@ class RestaurantRegistrationModal extends Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    console.log("Restaurant Registration..");
     const form = event.target;
+    await this.registerRestaurant(form);
+  }
+  async registerRestaurant(form) {
+    console.log("Restaurant Registration..");
     const data = new FormData(form);
     console.log("Data :", data);
-    var _restaurantName = web3.utils.asciiToHex(data.get("_restaurantName"));
-    var _restaurantCity = web3.utils.asciiToHex(data.get("_restaurantCity"));
-    var _restaurantZip = web3.utils.asciiToHex(data.get("_restaurantZip"), 8);
-    var _restaurantOwnerName = data.get("_restaurantOwnerName");
-    var _restaurantEmail = data.get("_restaurantEmail");
-    var _restaurantWebLink = data.get("_restaurantWebLink");
-    var _restaurantAddress = data.get("_restaurantAddress");
-    console.log(
-      _restaurantName,
-      _restaurantCity,
-      _restaurantZip,
-      _restaurantOwnerName,
-      _restaurantEmail,
-      _restaurantWebLink,
-      _restaurantAddress
+
+    var _name = web3.utils.asciiToHex(data.get("_name"));
+    var _contactNumber = web3.utils.asciiToHex(data.get("_contactNumber"), 16);
+    var _city = web3.utils.asciiToHex(data.get("_city"), 8);
+    var _ownerName = web3.utils.asciiToHex(data.get("_ownerName"));
+    var _restaurantAddress = web3.utils.asciiToHex(
+      data.get("_restaurantAddress")
     );
+    console.log(_name, _contactNumber, _city, _ownerName, _restaurantAddress);
     /*await WE_DO_DELIVERY.methods.registerRestaurant(_restaurantName,_restaurantCity,_restaurantZip,
         _restaurantOwnerName,_restaurantEmail,_restaurantWebLink,_restaurantAddress).send({from:this.props.account}).once('receipt',(receipt)=>{console.log("Receipt",receipt)});*/
     await WE_DO_DELIVERY.methods
-      .registerRestaurant(_restaurantName, _restaurantCity)
+      .registerRestaurant(
+        _name,
+        _contactNumber,
+        _city,
+        _ownerName,
+        _restaurantAddress
+      )
       .send({ from: this.props.account })
       .once("receipt", receipt => {
         console.log("Receipt:", receipt);
       });
   }
-  registerRestaurant() {}
   render() {
     return (
       <Modal
@@ -57,44 +58,33 @@ class RestaurantRegistrationModal extends Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>------</h4>
+            {/*<h4>------</h4>*/}
 
             <input
               type="text"
               className="form-control custom-form-control"
-              name="_restaurantName"
+              name="_name"
               placeholder="Name"
             />
             <input
               type="text"
               className="form-control custom-form-control"
-              name="_restaurantCity"
+              name="_city"
               placeholder="City"
             />
             <input
               type="text"
               className="form-control custom-form-control"
-              name="_restaurantZip"
-              placeholder="Zip"
+              name="_contactNumber"
+              placeholder="Contact Number"
             />
             <input
               type="text"
               className="form-control custom-form-control"
-              name="_restaurantOwnerName"
+              name="_ownerName"
               placeholder="Owner Name"
             />
-            <input
-              type="text"
-              className="form-control custom-form-control"
-              name="_restaurantEmail"
-              placeholder="Email"
-            />
-            <input
-              type="text"
-              className="form-control custom-form-control"
-              name="_restaurantWebLink"
-              placeholder="Website Link"
-            />
+
             <textarea
               type="text"
               className="form-control custom-form-control"
