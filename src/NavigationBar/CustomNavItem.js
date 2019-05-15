@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-class NavigationLink extends Component {
+class CustomNavItem extends Component {
 	render() {
 		return (
 			<div className="nav-item">
@@ -18,4 +18,4 @@ class NavigationLink extends Component {
 	}
 }
 
-export default NavigationLink;
+export default CustomNavItem;

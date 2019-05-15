@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Navbar } from "react-bootstrap";
 import Logo from "./Logo";
-import NavigationLinks from "./NavigationLinks";
+import NavItems from "./NavItems";
 import "./HeadNavBar.css";
 
 class HeadNavBar extends Component {
@@ -11,7 +11,7 @@ class HeadNavBar extends Component {
         <div className="container">
           <Logo />
           {/* <SearchForm/>*/}
-          <NavigationLinks {...this.props} />
+          <NavItems {...this.props} />
         </div>
       </Navbar>
     );

@@ -1,6 +1,6 @@
 import web3 from "./web3";
 
-const WE_DO_DELIVERY_ADDRESS = "0xd86619512a3518ae0f47044e843e246afc93323d";
+const WE_DO_DELIVERY_ADDRESS = "0x36a40FD73aF8D0d0F903891Fd8c420ecD09Cec76";
 const WE_DO_DELIVERY_ABI = [
   {
     constant: false,
@@ -187,7 +187,7 @@ const WE_DO_DELIVERY_ABI = [
       },
       {
         indexed: false,
-        name: "_location",
+        name: "_city",
         type: "bytes32"
       }
     ],
@@ -288,6 +288,24 @@ const WE_DO_DELIVERY_ABI = [
     ],
     name: "OrderConfirmed",
     type: "event"
+  },
+  {
+    constant: true,
+    inputs: [],
+    name: "getAccountType",
+    outputs: [
+      {
+        name: "_address",
+        type: "address"
+      },
+      {
+        name: "_accountType",
+        type: "uint8"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
   },
   {
     constant: true,

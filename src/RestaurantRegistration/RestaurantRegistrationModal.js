@@ -41,12 +41,15 @@ class RestaurantRegistrationModal extends Component {
       .send({ from: this.props.account })
       .once("receipt", receipt => {
         console.log("Receipt:", receipt);
+        this.props.onAccountRegistered(this.props.account);
       });
   }
   render() {
+    var { onHide, show } = this.props;
     return (
       <Modal
-        {...this.props}
+        onHide={onHide}
+        show={show}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -112,7 +115,7 @@ class RestaurantRegistrationModal extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button type="submit">Submit</Button>
-            <Button onClick={this.props.onHide}>Close</Button>
+            <Button onClick={onHide}>Close</Button>
           </Modal.Footer>
         </form>
       </Modal>
