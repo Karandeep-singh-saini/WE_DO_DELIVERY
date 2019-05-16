@@ -8,7 +8,7 @@ class MenuContainer extends Component {
 		super(props);
 		this.state = {
 			menu: {
-				itemsName: [
+				itemsName: /*[
 					"Item One",
 					"Item Two",
 					"Item Three",
@@ -17,8 +17,9 @@ class MenuContainer extends Component {
 					"Item Six",
 					"Item Seven",
 					"Item Eight"
-				] /*this.props.restaurant._itemsNames*/,
-				itemsPrice: [
+				]*/ this
+					.props.restaurant._itemsNames,
+				itemsPrice: /*[
 					20,
 					25,
 					30,
@@ -27,8 +28,11 @@ class MenuContainer extends Component {
 					45,
 					50,
 					55
-				] /* this.props.restaurant._itemsPrice*/,
-				quantitys: new Uint8Array(8)
+				] */ this.props.restaurant
+					._itemsPrice,
+				quantitys: new Uint8Array(
+					this.props.restaurant._itemsPrice.length
+				)
 			},
 			cart: {
 				itemsId: [], //Index of items in menu
@@ -139,13 +143,13 @@ class MenuContainer extends Component {
 	handleOrder = async () => {
 		const account = await AppUtilities.getAccount();
 		const userAccountAddress = account;
-		const restaurantAddress = this.props.restaurant._restaurantAddress;
+		const restaurantAccount = this.props.restaurantAccount;
 		const itemsId = this.state.cart.itemsId;
 		const quantitys = this.state.cart.quantitys;
 		var date = new Date();
 		var orderId = AppUtilities.convertStringToByte32(
 			date.toString() +
-				restaurantAddress +
+				restaurantAccount +
 				itemsId.toString() +
 				quantitys.toString() +
 				userAccountAddress
@@ -153,19 +157,26 @@ class MenuContainer extends Component {
 		console.log("order ID", orderId);
 		console.log("Order :", AppUtilities.convertHexToAscii(orderId));
 		await WE_DO_DELIVERY.methods
-			.placeOrder(restaurantAddress, orderId, itemsId, quantitys)
+			.placeOrder(restaurantAccount, orderId, itemsId, quantitys)
 			.send({ from: userAccountAddress })
 			.once("receipt", receipt => {
 				console.log("Receipt:", receipt);
 			});
 	};
-
+	/*handleAddMenu = async()=>{
+		await WE_DO_DELIVERY.methods
+			.addMenu()
+			.send({ from: userAccountAddress })
+			.once("receipt", receipt => {
+				console.log("Receipt:", receipt);
+			});
+	}
+*/
 	render() {
 		return (
 			<div className="container">
 				<div className="row">
 					<div className="col-7">
-						<h2 className="text-center">Menu</h2>
 						<Menu
 							menu={this.state.menu}
 							onDelete={this.handleDelete}

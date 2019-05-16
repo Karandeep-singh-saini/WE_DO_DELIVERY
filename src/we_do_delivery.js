@@ -1,6 +1,6 @@
 import web3 from "./web3";
 
-const WE_DO_DELIVERY_ADDRESS = "0x36a40FD73aF8D0d0F903891Fd8c420ecD09Cec76";
+const WE_DO_DELIVERY_ADDRESS = "0x006e32a3903db096d3751d45610f20a5e8a92646";
 const WE_DO_DELIVERY_ABI = [
   {
     constant: false,
@@ -311,6 +311,29 @@ const WE_DO_DELIVERY_ABI = [
     constant: true,
     inputs: [
       {
+        name: "_restaurantAccount",
+        type: "address"
+      }
+    ],
+    name: "getMenu",
+    outputs: [
+      {
+        name: "_itemsNames",
+        type: "bytes32[]"
+      },
+      {
+        name: "_itemsPrice",
+        type: "uint32[]"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
         name: "_index",
         type: "uint256"
       }
@@ -340,6 +363,49 @@ const WE_DO_DELIVERY_ABI = [
       {
         name: "_restaurantAddress",
         type: "bytes32"
+      }
+    ],
+    payable: false,
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    constant: true,
+    inputs: [
+      {
+        name: "_restaurantAccount",
+        type: "address"
+      }
+    ],
+    name: "getRestaurantByAddress",
+    outputs: [
+      {
+        name: "_name",
+        type: "bytes32"
+      },
+      {
+        name: "_contactNumber",
+        type: "bytes16"
+      },
+      {
+        name: "_city",
+        type: "bytes8"
+      },
+      {
+        name: "_ownerName",
+        type: "bytes32"
+      },
+      {
+        name: "_restaurantAddress",
+        type: "bytes32"
+      },
+      {
+        name: "_itemsNames",
+        type: "bytes32[]"
+      },
+      {
+        name: "_itemsPrice",
+        type: "uint32[]"
       }
     ],
     payable: false,

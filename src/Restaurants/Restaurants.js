@@ -11,7 +11,7 @@ class Restaurants extends Component {
 			restaurants: [],
 			loading: true
 		};
-		this.listenForEventRestaurantAdded = this.listenForEventRestaurantAdded.bind(
+		this.handleRestaurantRegistered = this.handleRestaurantRegistered.bind(
 			this
 		);
 		this.changeRestaurantArrayAsGrid = this.changeRestaurantArrayAsGrid.bind(
@@ -33,7 +33,7 @@ class Restaurants extends Component {
 			console.log(restaurant);
 			this.state.restaurants.push(restaurant);
 		}
-		this.listenForEventRestaurantAdded();
+		this.handleRestaurantRegistered();
 		//	This call will trigger the render method so that it gets updated.
 		this.setState({
 			restaurants: this.state.restaurants,
@@ -41,7 +41,7 @@ class Restaurants extends Component {
 			loading: false
 		});
 	}
-	listenForEventRestaurantAdded() {
+	handleRestaurantRegistered() {
 		WE_DO_DELIVERY.events.RestaurantRegistered(
 			{
 				/* fromBlock: 0,*/

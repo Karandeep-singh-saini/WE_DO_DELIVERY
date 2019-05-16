@@ -6,9 +6,7 @@ import { Button } from "react-bootstrap";
 class RestaurantInfo extends Component {
 	render() {
 		var name = AppUtilities.convertHexToAscii(this.props.restaurant._name);
-		var location = AppUtilities.convertHexToAscii(
-			this.props.restaurant._location
-		);
+		var city = AppUtilities.convertHexToAscii(this.props.restaurant._city);
 		return (
 			<div className="container">
 				<div className="row">
@@ -27,7 +25,7 @@ class RestaurantInfo extends Component {
 								<h1>{name} </h1>
 							</div>
 							<div className="row">
-								<h3>{location}</h3>
+								<h3>{city}</h3>
 							</div>
 						</div>
 					</div>

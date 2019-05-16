@@ -72,7 +72,7 @@ class App extends Component {
             <Route exact path="/restaurants" component={Restaurants} />
             <Route
               exact
-              path="/restaurants/:restaurantIndex"
+              path="/restaurants/:_restaurantAccount"
               component={RestaurantPage}
             />
           </div>

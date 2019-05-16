@@ -8,7 +8,7 @@ class RestaurantPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			restaurantIndex: props.match.params.restaurantIndex,
+			restaurantAccount: props.match.params._restaurantAccount,
 			restaurant: null,
 			loading: true
 		};
@@ -20,7 +20,7 @@ class RestaurantPage extends Component {
 
 	async getBlockchainData() {
 		const result = await WE_DO_DELIVERY.methods
-			.getRestaurant(this.state.restaurantIndex)
+			.getRestaurantByAddress(this.state.restaurantAccount)
 			.call();
 		this.setState({ restaurant: result, loading: false });
 		console.log(result);
@@ -38,7 +38,10 @@ class RestaurantPage extends Component {
 					<div>
 						<RestaurantInfo restaurant={this.state.restaurant} />
 						<hr />
-						<MenuContainer restaurant={this.state.restaurant} />
+						<MenuContainer
+							restaurant={this.state.restaurant}
+							restaurantAccount={this.state.restaurantAccount}
+						/>
 					</div>
 				) : (
 					<h1>Restaurant : {this.state.restaurant} </h1>

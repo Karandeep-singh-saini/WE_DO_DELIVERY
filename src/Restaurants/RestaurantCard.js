@@ -13,7 +13,7 @@ class RestaurantCard extends Component {
 			<Link
 				to={{
 					pathname: `/restaurants/${
-						this.props.restaurant._restaurantIndex
+						this.props.restaurant._restaurantAccount
 					}`,
 					state: {
 						restaurant: this.props.restaurant
