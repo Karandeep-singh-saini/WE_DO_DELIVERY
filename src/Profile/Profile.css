@@ -1,0 +1,28 @@
+.custom-table-container {
+	position: relative;
+	/*	text-align: center;*/
+	border-right: 2px solid #000;
+
+	padding-top: 5px;
+	padding-right: 5px;
+}
+.table-edit-Icon {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: white;
+	padding: 3px;
+}
+.table-edit-Icon:hover {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: white;
+	padding: 2px;
+}
+input[type="text"]:disabled,
+.profile-textarea:disabled {
+	background: #fff;
+	border: 1px solid #fff;
+	resize: none;
+}

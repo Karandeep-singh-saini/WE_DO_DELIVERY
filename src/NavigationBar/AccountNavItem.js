@@ -1,33 +1,48 @@
 import React, { Component } from "react";
+import { Dropdown } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import person from "./icons-svg/person.svg";
 
 class AccountNavItem extends Component {
   render() {
     let { account, accountType } = this.props;
     let type = "";
-    let badgeClass = "disabled btn btn-";
+    let variant = "info";
+    let url = "";
     if (accountType === "0") {
       type = "Restaurant";
-      badgeClass += "info";
+      url = "account/restaurant/" + account;
     } else if (accountType === "1") {
       type = "Rider";
-      badgeClass += "info";
+      url = "account/rider/" + account;
     } else if (accountType === "2") {
       type = "User";
-      badgeClass += "info";
+      url = "account/user/" + account;
     } else if (accountType === "3") {
       type = "Unregistered";
-      badgeClass += "warning";
+      variant = "warning";
     }
     return (
-      <span
-        className={badgeClass}
-        data-toggle="tooltip"
-        data-placement="bottom"
-        title={account}
-      >
-        {type} <img src={person} alt="Person" />
-      </span>
+      <Dropdown>
+        <Dropdown.Toggle variant={variant} id="dropdown-basic">
+          {type} <img src={person} alt="Person" />
+        </Dropdown.Toggle>
+        {accountType !== "3" && (
+          <Dropdown.Menu>
+            <Dropdown.Header>
+              <b>
+                {account.substr(0, 6) +
+                  "...." +
+                  account.substr(account.length - 4, account.length)}
+              </b>
+            </Dropdown.Header>
+            <Dropdown.Divider />
+            <NavLink exact to={url} className="dropdown-item">
+              View Account
+            </NavLink>
+          </Dropdown.Menu>
+        )}
+      </Dropdown>
     );
   }
 }

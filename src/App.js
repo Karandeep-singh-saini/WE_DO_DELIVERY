@@ -7,6 +7,7 @@ import "./App.css";
 import HeadNavBar from "./NavigationBar/HeadNavBar";
 import Restaurants from "./Restaurants/Restaurants";
 import RestaurantPage from "./RestaurantPage/RestaurantPage";
+import Profile from "./Profile/Profile";
 import Footer from "./Footer/Footer";
 import Home from "./HomePage/Home";
 
@@ -70,6 +71,7 @@ class App extends Component {
           <div id="content-wrap">
             <Route exact path="/" component={Home} />
             <Route exact path="/restaurants" component={Restaurants} />
+            <Route exact path="/account/:_type/:_account" component={Profile} />
             <Route
               exact
               path="/restaurants/:_restaurantAccount"
