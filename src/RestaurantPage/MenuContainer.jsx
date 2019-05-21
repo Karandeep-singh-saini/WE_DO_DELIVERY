@@ -8,28 +8,8 @@ class MenuContainer extends Component {
 		super(props);
 		this.state = {
 			menu: {
-				itemsName: /*[
-					"Item One",
-					"Item Two",
-					"Item Three",
-					"Item Four",
-					"Item Five",
-					"Item Six",
-					"Item Seven",
-					"Item Eight"
-				]*/ this
-					.props.restaurant._itemsNames,
-				itemsPrice: /*[
-					20,
-					25,
-					30,
-					35,
-					40,
-					45,
-					50,
-					55
-				] */ this.props.restaurant
-					._itemsPrice,
+				itemsName: this.props.restaurant._itemsNames,
+				itemsPrice: this.props.restaurant._itemsPrice,
 				quantitys: new Uint8Array(
 					this.props.restaurant._itemsPrice.length
 				)
@@ -179,16 +159,16 @@ class MenuContainer extends Component {
 					<div className="col-7">
 						<Menu
 							menu={this.state.menu}
-							onDelete={this.handleDelete}
 							onIncrement={this.handleIncrement}
 							onDecrement={this.handleDecrement}
+							/*	onDelete={this.handleDelete}*/
 						/>
 					</div>
 
 					<div className="col-5" style={{ borderLeft: "solid" }}>
 						<h2 className="text-center">Cart</h2>
 
-						<table className="table table-sm">
+						<table className="table table-sm text-center">
 							<thead>
 								<tr>
 									<th scope="col">#</th>
@@ -211,7 +191,11 @@ class MenuContainer extends Component {
 														]
 													}
 												</td>
-												<td>{itemName}</td>
+												<td>
+													{AppUtilities.convertHexToAscii(
+														itemName
+													)}
+												</td>
 												<td>
 													{
 														this.state.cart

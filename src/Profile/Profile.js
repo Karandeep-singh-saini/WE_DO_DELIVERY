@@ -26,6 +26,7 @@ class Profile extends Component {
 				<RestaurantProfile
 					onEdit={this.handleEdit}
 					disabled={this.state.disabled}
+					restaurantAccount={this.props.match.params._account}
 				/>
 			);
 		else if (type === "rider")

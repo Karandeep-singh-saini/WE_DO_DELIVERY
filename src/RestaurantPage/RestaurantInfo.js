@@ -29,9 +29,6 @@ class RestaurantInfo extends Component {
 							</div>
 						</div>
 					</div>
-					<div className="col-3">
-						<Button variant="outline-primary">Add Menu</Button>
-					</div>
 				</div>
 			</div>
 		);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ItemAlterationOptions from "./ItemAlterationOptions";
+/*import ItemAlterationOptions from "./ItemAlterationOptions";*/
 import QuantityCounter from "./QuantityCounter";
 class Item extends Component {
 	render() {
@@ -25,10 +25,10 @@ class Item extends Component {
 					/>
 					{/*Include one of this depending upon the owner of
 					restaurant*/}
-					<ItemAlterationOptions
+					{/*<ItemAlterationOptions
 						id={this.props.id}
 						onDelete={this.props.onDelete}
-					/>
+					/>*/}
 				</div>
 			</div>
 		);

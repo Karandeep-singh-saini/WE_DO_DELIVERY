@@ -73,7 +73,9 @@ class UserProfile extends Component {
 						</div>
 					</div>
 					<div className="col-7">
-						<div>Order History</div>
+						<div>
+							<h1 className="text-center">Order History</h1>
+						</div>
 					</div>
 				</div>
 			</div>

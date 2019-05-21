@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Item from "./Item";
+import AppUtilities from "../utility/utility";
 
 class Menu extends Component {
 	render() {
@@ -13,19 +14,21 @@ class Menu extends Component {
 							<Item
 								key={index}
 								id={index}
-								itemName={itemName}
+								itemName={AppUtilities.convertHexToAscii(
+									itemName
+								)}
 								itemPrice={menu.itemsPrice[index]}
 								quantity={menu.quantitys[index]}
 								onIncrement={onIncrement}
 								onDecrement={onDecrement}
-								onDelete={onDelete}
+								/*onDelete={onDelete}*/
 							/>
 						);
 					})}
 				</React.Fragment>
 			);
 		} else {
-			return <div>Create Menu</div>;
+			return <div>No Menu Added Yet.</div>;
 		}
 	}
 }

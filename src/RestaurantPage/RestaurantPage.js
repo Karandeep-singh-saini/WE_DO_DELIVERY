@@ -15,10 +15,10 @@ class RestaurantPage extends Component {
 	}
 
 	componentWillMount() {
-		this.getBlockchainData();
+		this.getRestaurantByAddress();
 	}
 
-	async getBlockchainData() {
+	async getRestaurantByAddress() {
 		const result = await WE_DO_DELIVERY.methods
 			.getRestaurantByAddress(this.state.restaurantAccount)
 			.call();
